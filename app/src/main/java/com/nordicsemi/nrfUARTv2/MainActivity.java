@@ -79,12 +79,13 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     private BluetoothDevice mDevice = null;
     private BluetoothAdapter mBtAdapter = null;
     private ListView messageListView;
-    private GraphView graph;
     private ArrayAdapter<String> listAdapter;
     private Button btnConnectDisconnect;  //btnSend
     //private EditText edtMessage;
 
+    private GraphView graph;
     private LineGraphSeries<DataPoint> series;
+    private int time_index = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,13 +104,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         messageListView.setDivider(null);
 
         graph = (GraphView) findViewById(R.id.graphView);
-        series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
-        });
+        series = new LineGraphSeries<DataPoint>(new DataPoint[] {new DataPoint(0, 0)});
         graph.addSeries(series);
 
         btnConnectDisconnect=(Button) findViewById(R.id.btn_select);
@@ -224,6 +219,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                             ((TextView) findViewById(R.id.deviceName)).setText(mDevice.getName() + " - ready");
                             listAdapter.add("[" + currentDateTimeString + "] Connected to: " + mDevice.getName());
                             messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
+
                         }
                     });
                 }
@@ -264,8 +260,8 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                                 listAdapter.add("[" + currentDateTimeString + "] RX: " + text);
                                 messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
 
-                                DataPoint point = new DataPoint(10, 3);
-                                series.appendData(point, true, 100);
+                                DataPoint point = new DataPoint(++time_index, 1);
+                                series.appendData(point, true, 20);
 
                             } catch (Exception e) {
                                 Log.e(TAG, e.toString());
