@@ -17,6 +17,9 @@
 package com.nordicsemi.nrfUARTv2;
 
 
+import java.util.Random;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 
 import java.io.UnsupportedEncodingException;
@@ -84,7 +87,9 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     //private EditText edtMessage;
 
     private GraphView graph;
-    private LineGraphSeries<DataPoint> series;
+    private LineGraphSeries<DataPoint> seriesX;
+    private LineGraphSeries<DataPoint> seriesY;
+    private LineGraphSeries<DataPoint> seriesZ;
     private int time_index = 0;
 
     @Override
@@ -104,8 +109,24 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         messageListView.setDivider(null);
 
         graph = (GraphView) findViewById(R.id.graphView);
-        series = new LineGraphSeries<DataPoint>(new DataPoint[] {new DataPoint(0, 0)});
-        graph.addSeries(series);
+
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(250);
+        graph.getViewport().setMaxY(450);
+
+        /*
+        graph.getViewport().setScalable(false);
+        graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(20);
+        */
+
+
+        seriesX = new LineGraphSeries<DataPoint>(new DataPoint[] {});
+        graph.addSeries(seriesX);
+        seriesY = new LineGraphSeries<DataPoint>(new DataPoint[] {});
+        graph.addSeries(seriesY);
+        seriesZ = new LineGraphSeries<DataPoint>(new DataPoint[] {});
+        graph.addSeries(seriesZ);
 
         btnConnectDisconnect=(Button) findViewById(R.id.btn_select);
         //btnSend=(Button) findViewById(R.id.sendButton);
@@ -260,8 +281,35 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                                 listAdapter.add("[" + currentDateTimeString + "] RX: " + text);
                                 messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
 
-                                DataPoint point = new DataPoint(++time_index, 1);
-                                series.appendData(point, true, 20);
+                                Pattern pattern;
+                                Matcher matcher;
+
+                                pattern = Pattern.compile("\\d\\d\\dx");
+                                matcher = pattern.matcher(text);
+                                while (matcher.find()) {
+                                    String value = matcher.group().substring(0, 3);
+                                    //listAdapter.add(value);
+                                    DataPoint point = new DataPoint(++time_index, Integer.parseInt(value));
+                                    seriesX.appendData(point, true, 20);
+                                }
+
+                                pattern = Pattern.compile("\\d\\d\\dy");
+                                matcher = pattern.matcher(text);
+                                while (matcher.find()) {
+                                    String value = matcher.group().substring(0, 3);
+                                    //listAdapter.add(value);
+                                    DataPoint point = new DataPoint(++time_index, Integer.parseInt(value));
+                                    seriesY.appendData(point, true, 20);
+                                }
+
+                                pattern = Pattern.compile("\\d\\d\\dz");
+                                matcher = pattern.matcher(text);
+                                while (matcher.find()) {
+                                    String value = matcher.group().substring(0, 3);
+                                    //listAdapter.add(value);
+                                    DataPoint point = new DataPoint(++time_index, Integer.parseInt(value));
+                                    seriesZ.appendData(point, true, 20);
+                                }
 
                             } catch (Exception e) {
                                 Log.e(TAG, e.toString());
