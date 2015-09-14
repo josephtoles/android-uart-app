@@ -83,6 +83,9 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     private ArrayAdapter<String> listAdapter;
     private Button btnConnectDisconnect;  //btnSend
     //private EditText edtMessage;
+
+    private LineGraphSeries<DataPoint> series;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +103,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         messageListView.setDivider(null);
 
         graph = (GraphView) findViewById(R.id.graphView);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+        series = new LineGraphSeries<DataPoint>(new DataPoint[] {
                 new DataPoint(0, 1),
                 new DataPoint(1, 5),
                 new DataPoint(2, 3),
@@ -200,80 +203,86 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         }
     };
 
-    private final BroadcastReceiver UARTStatusChangeReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver UARTStatusChangeReceiver;
 
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
+    {
+        UARTStatusChangeReceiver = new BroadcastReceiver() {
 
-            final Intent mIntent = intent;
-           //*********************//
-            if (action.equals(UartService.ACTION_GATT_CONNECTED)) {
-            	 runOnUiThread(new Runnable() {
-                     public void run() {
-                         	String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
-                             Log.d(TAG, "UART_CONNECT_MSG");
-                             btnConnectDisconnect.setText("Disconnect");
-                             //edtMessage.setEnabled(true);
-                             //btnSend.setEnabled(true);
-                             ((TextView) findViewById(R.id.deviceName)).setText(mDevice.getName()+ " - ready");
-                             listAdapter.add("["+currentDateTimeString+"] Connected to: "+ mDevice.getName());
-                        	 	messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
-                             mState = UART_PROFILE_CONNECTED;
-                     }
-            	 });
-            }
-           
-          //*********************//
-            if (action.equals(UartService.ACTION_GATT_DISCONNECTED)) {
-            	 runOnUiThread(new Runnable() {
-                     public void run() {
-                    	 	 String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
-                             Log.d(TAG, "UART_DISCONNECT_MSG");
-                             btnConnectDisconnect.setText("Connect");
-                             //edtMessage.setEnabled(false);
-                             //btnSend.setEnabled(false);
-                             ((TextView) findViewById(R.id.deviceName)).setText("Not Connected");
-                             listAdapter.add("["+currentDateTimeString+"] Disconnected to: "+ mDevice.getName());
-                             mState = UART_PROFILE_DISCONNECTED;
-                             mService.close();
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+
+                final Intent mIntent = intent;
+                //*********************//
+                if (action.equals(UartService.ACTION_GATT_CONNECTED)) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
+                            Log.d(TAG, "UART_CONNECT_MSG");
+                            btnConnectDisconnect.setText("Disconnect");
+                            //edtMessage.setEnabled(true);
+                            //btnSend.setEnabled(true);
+                            ((TextView) findViewById(R.id.deviceName)).setText(mDevice.getName() + " - ready");
+                            listAdapter.add("[" + currentDateTimeString + "] Connected to: " + mDevice.getName());
+                            messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
+                        }
+                    });
+                }
+
+                //*********************//
+                if (action.equals(UartService.ACTION_GATT_DISCONNECTED)) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
+                            Log.d(TAG, "UART_DISCONNECT_MSG");
+                            btnConnectDisconnect.setText("Connect");
+                            //edtMessage.setEnabled(false);
+                            //btnSend.setEnabled(false);
+                            ((TextView) findViewById(R.id.deviceName)).setText("Not Connected");
+                            listAdapter.add("[" + currentDateTimeString + "] Disconnected to: " + mDevice.getName());
+                            mState = UART_PROFILE_DISCONNECTED;
+                            mService.close();
                             //setUiState();
-                         
-                     }
-                 });
+
+                        }
+                    });
+                }
+
+
+                //*********************//
+                if (action.equals(UartService.ACTION_GATT_SERVICES_DISCOVERED)) {
+                    mService.enableTXNotification();
+                }
+                //*********************//
+                if (action.equals(UartService.ACTION_DATA_AVAILABLE)) {
+
+                    final byte[] txValue = intent.getByteArrayExtra(UartService.EXTRA_DATA);
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            try {
+                                String text = new String(txValue, "UTF-8");
+                                String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
+                                listAdapter.add("[" + currentDateTimeString + "] RX: " + text);
+                                messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
+
+                                DataPoint point = new DataPoint(10, 3);
+                                series.appendData(point, true, 100);
+
+                            } catch (Exception e) {
+                                Log.e(TAG, e.toString());
+                            }
+                        }
+                    });
+                }
+                //*********************//
+                if (action.equals(UartService.DEVICE_DOES_NOT_SUPPORT_UART)) {
+                    showMessage("Device doesn't support UART. Disconnecting");
+                    mService.disconnect();
+                }
+
+
             }
-            
-          
-          //*********************//
-            if (action.equals(UartService.ACTION_GATT_SERVICES_DISCOVERED)) {
-             	 mService.enableTXNotification();
-            }
-          //*********************//
-            if (action.equals(UartService.ACTION_DATA_AVAILABLE)) {
-              
-                 final byte[] txValue = intent.getByteArrayExtra(UartService.EXTRA_DATA);
-                 runOnUiThread(new Runnable() {
-                     public void run() {
-                         try {
-                         	String text = new String(txValue, "UTF-8");
-                         	String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
-                        	 	listAdapter.add("["+currentDateTimeString+"] RX: "+text);
-                        	 	messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
-                        	
-                         } catch (Exception e) {
-                             Log.e(TAG, e.toString());
-                         }
-                     }
-                 });
-             }
-           //*********************//
-            if (action.equals(UartService.DEVICE_DOES_NOT_SUPPORT_UART)){
-            	showMessage("Device doesn't support UART. Disconnecting");
-            	mService.disconnect();
-            }
-            
-            
-        }
-    };
+        };
+    }
 
     private void service_init() {
         Intent bindIntent = new Intent(this, UartService.class);

@@ -26,27 +26,17 @@
         android:layout_weight="0.31"
         android:orientation="vertical" >
 
-        <RelativeLayout
-            android:id="@+id/RelativeLayout1"
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graphView"
             android:layout_width="match_parent"
-            android:layout_height="292dp"
-            android:layout_weight="4.11"
-            android:orientation="vertical" >
+            android:layout_height="100dip" />
 
-            <com.jjoe64.graphview.GraphView
-                android:id="@+id/graphView"
-                android:layout_width="match_parent"
-                android:layout_height="100dip" />
-
-            <ListView
-                android:id="@+id/listMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true" >
-            </ListView>
-
-        </RelativeLayout>
+        <ListView
+            android:id="@+id/listMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true">
+        </ListView>
     </LinearLayout>
 
     <RelativeLayout
