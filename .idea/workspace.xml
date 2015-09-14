@@ -16,7 +16,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/nordicsemi/nrfUARTv2/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/nordicsemi/nrfUARTv2/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/message_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/message_detail.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Android-nRF-UART.iws" />
@@ -65,8 +64,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.51724136">
-              <caret line="32" column="44" selection-start-line="32" selection-start-column="44" selection-end-line="32" selection-end-column="44" />
+            <state vertical-scroll-proportion="6.6896553">
+              <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -98,26 +97,27 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nordicsemi/nrfUARTv2/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.89624727">
-              <caret line="216" column="31" selection-start-line="216" selection-start-column="31" selection-end-line="216" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.33112583">
+              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6683#10238#0" expanded="true" />
-                <element signature="e#6999#7832#0" expanded="true" />
-                <element signature="e#7831#7832#0" expanded="true" />
-                <element signature="e#7996#8846#0" expanded="true" />
-                <element signature="e#8845#8846#0" expanded="true" />
-                <element signature="e#9303#9946#0" expanded="true" />
-                <element signature="e#9945#9946#0" expanded="true" />
-                <element signature="e#10237#10238#0" expanded="true" />
-                <element signature="e#11105#11106#0" expanded="true" />
-                <element signature="e#11136#11137#0" expanded="true" />
-                <element signature="e#14633#14653#0" expanded="true" />
-                <element signature="e#14679#14701#0" expanded="true" />
-                <element signature="e#14734#14752#0" expanded="true" />
-                <element signature="e#14754#14978#0" expanded="true" />
-                <element signature="e#14977#14978#0" expanded="true" />
-                <element signature="e#15011#15028#0" expanded="true" />
+                <element signature="e#3682#3693#0" expanded="true" />
+                <element signature="e#7232#10787#0" expanded="true" />
+                <element signature="e#7548#8381#0" expanded="true" />
+                <element signature="e#8380#8381#0" expanded="true" />
+                <element signature="e#8545#9395#0" expanded="true" />
+                <element signature="e#9394#9395#0" expanded="true" />
+                <element signature="e#9852#10495#0" expanded="true" />
+                <element signature="e#10494#10495#0" expanded="true" />
+                <element signature="e#10786#10787#0" expanded="true" />
+                <element signature="e#11654#11655#0" expanded="true" />
+                <element signature="e#11685#11686#0" expanded="true" />
+                <element signature="e#15182#15202#0" expanded="true" />
+                <element signature="e#15228#15250#0" expanded="true" />
+                <element signature="e#15283#15301#0" expanded="true" />
+                <element signature="e#15303#15527#0" expanded="true" />
+                <element signature="e#15526#15527#0" expanded="true" />
+                <element signature="e#15560#15577#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2021,14 +2021,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nordicsemi/nrfUARTv2/DeviceListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.5925927">
@@ -2116,6 +2108,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.6896553">
+          <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dis_values.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2127,39 +2138,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.51724136">
-          <caret line="32" column="44" selection-start-line="32" selection-start-column="44" selection-end-line="32" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nordicsemi/nrfUARTv2/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.89624727">
-          <caret line="216" column="31" selection-start-line="216" selection-start-column="31" selection-end-line="216" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.33112583">
+          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6683#10238#0" expanded="true" />
-            <element signature="e#6999#7832#0" expanded="true" />
-            <element signature="e#7831#7832#0" expanded="true" />
-            <element signature="e#7996#8846#0" expanded="true" />
-            <element signature="e#8845#8846#0" expanded="true" />
-            <element signature="e#9303#9946#0" expanded="true" />
-            <element signature="e#9945#9946#0" expanded="true" />
-            <element signature="e#10237#10238#0" expanded="true" />
-            <element signature="e#11105#11106#0" expanded="true" />
-            <element signature="e#11136#11137#0" expanded="true" />
-            <element signature="e#14633#14653#0" expanded="true" />
-            <element signature="e#14679#14701#0" expanded="true" />
-            <element signature="e#14734#14752#0" expanded="true" />
-            <element signature="e#14754#14978#0" expanded="true" />
-            <element signature="e#14977#14978#0" expanded="true" />
-            <element signature="e#15011#15028#0" expanded="true" />
+            <element signature="e#3682#3693#0" expanded="true" />
+            <element signature="e#7232#10787#0" expanded="true" />
+            <element signature="e#7548#8381#0" expanded="true" />
+            <element signature="e#8380#8381#0" expanded="true" />
+            <element signature="e#8545#9395#0" expanded="true" />
+            <element signature="e#9394#9395#0" expanded="true" />
+            <element signature="e#9852#10495#0" expanded="true" />
+            <element signature="e#10494#10495#0" expanded="true" />
+            <element signature="e#10786#10787#0" expanded="true" />
+            <element signature="e#11654#11655#0" expanded="true" />
+            <element signature="e#11685#11686#0" expanded="true" />
+            <element signature="e#15182#15202#0" expanded="true" />
+            <element signature="e#15228#15250#0" expanded="true" />
+            <element signature="e#15283#15301#0" expanded="true" />
+            <element signature="e#15303#15527#0" expanded="true" />
+            <element signature="e#15526#15527#0" expanded="true" />
+            <element signature="e#15560#15577#0" expanded="true" />
           </folding>
         </state>
       </provider>

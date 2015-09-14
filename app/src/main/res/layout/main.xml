@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -32,11 +33,15 @@
             android:layout_weight="4.11"
             android:orientation="vertical" >
 
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/graphView"
+                android:layout_width="match_parent"
+                android:layout_height="100dip" />
+
             <ListView
                 android:id="@+id/listMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/sendButton"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true" >
             </ListView>

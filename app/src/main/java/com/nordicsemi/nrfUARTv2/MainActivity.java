@@ -24,6 +24,9 @@ import java.text.DateFormat;
 import java.util.Date;
 
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 import com.nordicsemi.nrfUARTv2.UartService;
 
 import android.app.Activity;
@@ -76,6 +79,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     private BluetoothDevice mDevice = null;
     private BluetoothAdapter mBtAdapter = null;
     private ListView messageListView;
+    private GraphView graph;
     private ArrayAdapter<String> listAdapter;
     private Button btnConnectDisconnect;  //btnSend
     //private EditText edtMessage;
@@ -89,10 +93,22 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
             finish();
             return;
         }
+
         messageListView = (ListView) findViewById(R.id.listMessage);
         listAdapter = new ArrayAdapter<String>(this, R.layout.message_detail);
         messageListView.setAdapter(listAdapter);
         messageListView.setDivider(null);
+
+        graph = (GraphView) findViewById(R.id.graphView);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+        graph.addSeries(series);
+
         btnConnectDisconnect=(Button) findViewById(R.id.btn_select);
         //btnSend=(Button) findViewById(R.id.sendButton);
         //edtMessage = (EditText) findViewById(R.id.sendText);
