@@ -46,13 +46,16 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
+import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
+import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.Vibrator;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -91,6 +94,12 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     private LineGraphSeries<DataPoint> seriesY;
     private LineGraphSeries<DataPoint> seriesZ;
     private int time_index = 0;
+    private int previousX = 0;
+    private int previousY = 0;
+    private int previousZ = 0;
+    private boolean recentlyBeeped = false;
+
+    private static int TRIGGER_THRESHOLD = 55;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,8 +120,8 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         graph = (GraphView) findViewById(R.id.graphView);
 
         graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(250);
-        graph.getViewport().setMaxY(450);
+        graph.getViewport().setMinY(200);
+        graph.getViewport().setMaxY(500);
 
         /*
         graph.getViewport().setScalable(false);
@@ -283,13 +292,18 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
 
                                 Pattern pattern;
                                 Matcher matcher;
+                                //Initial values are irrelivant. Find a better way to write this.
+                                int x = 123;
+                                int y = 123;
+                                int z = 123;
 
                                 pattern = Pattern.compile("\\d\\d\\dx");
                                 matcher = pattern.matcher(text);
                                 while (matcher.find()) {
                                     String value = matcher.group().substring(0, 3);
                                     //listAdapter.add(value);
-                                    DataPoint point = new DataPoint(++time_index, Integer.parseInt(value));
+                                    x = Integer.parseInt(value);
+                                    DataPoint point = new DataPoint(++time_index, x);
                                     seriesX.appendData(point, true, 20);
                                 }
 
@@ -298,7 +312,8 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                                 while (matcher.find()) {
                                     String value = matcher.group().substring(0, 3);
                                     //listAdapter.add(value);
-                                    DataPoint point = new DataPoint(++time_index, Integer.parseInt(value));
+                                    y = Integer.parseInt(value);
+                                    DataPoint point = new DataPoint(++time_index, y);
                                     seriesY.appendData(point, true, 20);
                                 }
 
@@ -307,9 +322,34 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                                 while (matcher.find()) {
                                     String value = matcher.group().substring(0, 3);
                                     //listAdapter.add(value);
-                                    DataPoint point = new DataPoint(++time_index, Integer.parseInt(value));
+                                    z = Integer.parseInt(value);
+                                    DataPoint point = new DataPoint(++time_index, z);
                                     seriesZ.appendData(point, true, 20);
                                 }
+
+                                if (Math.abs(x - previousX) > TRIGGER_THRESHOLD ||
+                                        Math.abs(y - previousY) > TRIGGER_THRESHOLD ||
+                                        Math.abs(z - previousZ) > TRIGGER_THRESHOLD) {
+                                    if (!recentlyBeeped) {
+
+                                        final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+                                        tg.startTone(ToneGenerator.TONE_PROP_BEEP);
+
+                                        // Get instance of Vibrator from current Context
+                                        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                                        // Vibrate for 400 milliseconds
+                                        v.vibrate(400);
+
+                                        listAdapter.add("beep");
+                                        recentlyBeeped = true;
+                                    }
+                                } else {
+                                    recentlyBeeped = false;
+                                }
+
+                                previousX = x;
+                                previousY = y;
+                                previousZ = z;
 
                             } catch (Exception e) {
                                 Log.e(TAG, e.toString());
@@ -331,9 +371,10 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     private void service_init() {
         Intent bindIntent = new Intent(this, UartService.class);
         bindService(bindIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
-  
+
         LocalBroadcastManager.getInstance(this).registerReceiver(UARTStatusChangeReceiver, makeGattUpdateIntentFilter());
     }
+
     private static IntentFilter makeGattUpdateIntentFilter() {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(UartService.ACTION_GATT_CONNECTED);
