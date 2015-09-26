@@ -46,6 +46,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -128,6 +129,9 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(20);
         */
+        seriesX.setColor(Color.BLUE);
+        seriesX.setColor(Color.GREEN);
+        seriesX.setColor(Color.RED);
 
 
         seriesX = new LineGraphSeries<DataPoint>(new DataPoint[] {});
