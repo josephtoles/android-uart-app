@@ -90,6 +90,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     private Button btnConnectDisconnect;  //btnSend
     //private EditText edtMessage;
 
+    /*
     private GraphView graph;
     private LineGraphSeries<DataPoint> seriesX;
     private LineGraphSeries<DataPoint> seriesY;
@@ -98,6 +99,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     private int previousX = 0;
     private int previousY = 0;
     private int previousZ = 0;
+    */
     private boolean recentlyBeeped = false;
 
     private static int TRIGGER_THRESHOLD = 45;
@@ -118,19 +120,20 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         messageListView.setAdapter(listAdapter);
         messageListView.setDivider(null);
 
+        /*
         graph = (GraphView) findViewById(R.id.graphView);
 
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(200);
         graph.getViewport().setMaxY(500);
 
-        /*
         graph.getViewport().setScalable(false);
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(20);
         */
 
 
+        /*
         seriesX = new LineGraphSeries<DataPoint>(new DataPoint[] {});
         graph.addSeries(seriesX);
         seriesY = new LineGraphSeries<DataPoint>(new DataPoint[] {});
@@ -141,6 +144,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         seriesX.setColor(Color.BLUE);
         seriesY.setColor(Color.GREEN);
         seriesZ.setColor(Color.RED);
+        */
 
         btnConnectDisconnect=(Button) findViewById(R.id.btn_select);
         //btnSend=(Button) findViewById(R.id.sendButton);
@@ -252,8 +256,9 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                             //edtMessage.setEnabled(true);
                             //btnSend.setEnabled(true);
                             ((TextView) findViewById(R.id.deviceName)).setText(mDevice.getName() + " - ready");
-                            listAdapter.add("[" + currentDateTimeString + "] Connected to: " + mDevice.getName());
-                            messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
+                            //listAdapter.add("[" + currentDateTimeString + "] Connected to: " + mDevice.getName());
+                            listAdapter.insert("Connected", 0);
+                            //messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
 
                         }
                     });
@@ -269,8 +274,9 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                             //edtMessage.setEnabled(false);
                             //btnSend.setEnabled(false);
                             ((TextView) findViewById(R.id.deviceName)).setText("Not Connected");
-                            listAdapter.add("[" + currentDateTimeString + "] Disconnected to: " + mDevice.getName());
-                            mState = UART_PROFILE_DISCONNECTED;
+                            //listAdapter.add("[" + currentDateTimeString + "] Disconnected to: " + mDevice.getName());
+                            //listAdapter.insert("Disconnected", 0);
+                            //mState = UART_PROFILE_DISCONNECTED;
                             mService.close();
                             //setUiState();
 
