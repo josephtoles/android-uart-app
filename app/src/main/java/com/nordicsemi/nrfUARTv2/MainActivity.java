@@ -100,7 +100,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     private int previousZ = 0;
     private boolean recentlyBeeped = false;
 
-    private static int TRIGGER_THRESHOLD = 55;
+    private static int TRIGGER_THRESHOLD = 45;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -129,9 +129,6 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(20);
         */
-        seriesX.setColor(Color.BLUE);
-        seriesX.setColor(Color.GREEN);
-        seriesX.setColor(Color.RED);
 
 
         seriesX = new LineGraphSeries<DataPoint>(new DataPoint[] {});
@@ -140,6 +137,10 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         graph.addSeries(seriesY);
         seriesZ = new LineGraphSeries<DataPoint>(new DataPoint[] {});
         graph.addSeries(seriesZ);
+
+        seriesX.setColor(Color.BLUE);
+        seriesY.setColor(Color.GREEN);
+        seriesZ.setColor(Color.RED);
 
         btnConnectDisconnect=(Button) findViewById(R.id.btn_select);
         //btnSend=(Button) findViewById(R.id.sendButton);
@@ -290,10 +291,14 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                         public void run() {
                             try {
                                 String text = new String(txValue, "UTF-8");
-                                String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
-                                listAdapter.add("[" + currentDateTimeString + "] RX: " + text);
-                                messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
+                                //String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
+                                //listAdapter.add("[" + currentDateTimeString + "] RX: " + text);
+                                //messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
 
+                                listAdapter.insert(text, 0);
+
+                                /*
+                                // Tourettes' code
                                 Pattern pattern;
                                 Matcher matcher;
                                 //Initial values are irrelivant. Find a better way to write this.
@@ -354,6 +359,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                                 previousX = x;
                                 previousY = y;
                                 previousZ = z;
+                                */
 
                             } catch (Exception e) {
                                 Log.e(TAG, e.toString());

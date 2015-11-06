@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/Users/admin/slightlyrobot/Android-nRF-UART/app/build/intermediates/exploded-aar/com.jjoe64/graphview/4.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="37bf8de5b4f9e7e93006db783b9b3168e32e38e9">
-        <dex dex="/Users/admin/slightlyrobot/Android-nRF-UART/app/build/intermediates/pre-dexed/debug/classes-6172d9c6229c17f9047d8115a3b24b3e72a1124f.jar" />
-    </item>
-    <item
-        jar="/Users/admin/slightlyrobot/Android-nRF-UART/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/libs/internal_impl-23.0.0.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
-        <dex dex="/Users/admin/slightlyrobot/Android-nRF-UART/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.0-7a928ac1222d9f866c389ed41e9ccbe50f1165e8.jar" />
-    </item>
-    <item
-        jar="/Users/admin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar"
+        jar="/home/joseph/.android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.0/support-annotations-23.0.0.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="990e7f98a7bad86a40b1f0bcfeb039023afd0839">
-        <dex dex="/Users/admin/slightlyrobot/Android-nRF-UART/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.0-ab78b54758955efd1c4361a3371d97151722892a.jar" />
+        <dex dex="/home/joseph/slightlyrobot/android/boxing-android-app/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.0-e0c84e748b932d7dfc964556a3cd6970a94dab4e.jar" />
     </item>
     <item
-        jar="/Users/admin/slightlyrobot/Android-nRF-UART/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/classes.jar"
+        jar="/home/joseph/slightlyrobot/android/boxing-android-app/app/build/intermediates/exploded-aar/com.jjoe64/graphview/4.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="37bf8de5b4f9e7e93006db783b9b3168e32e38e9">
+        <dex dex="/home/joseph/slightlyrobot/android/boxing-android-app/app/build/intermediates/pre-dexed/debug/classes-fcd44dd04ff174b9cde87c647b5d4d510904404f.jar" />
+    </item>
+    <item
+        jar="/home/joseph/slightlyrobot/android/boxing-android-app/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/libs/internal_impl-23.0.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="8bd336eeae661e8311330284897ee07f8ebaa297">
+        <dex dex="/home/joseph/slightlyrobot/android/boxing-android-app/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.0-7ea801ab7a7fdde73dae240716d9fcfc7caf46de.jar" />
+    </item>
+    <item
+        jar="/home/joseph/slightlyrobot/android/boxing-android-app/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="8413c27b45b7fe61dca4a98159f65e2cee215f5a">
-        <dex dex="/Users/admin/slightlyrobot/Android-nRF-UART/app/build/intermediates/pre-dexed/debug/classes-5a717cc09f86d25d98ec4744dcb04f2b7a1ee7b0.jar" />
+        <dex dex="/home/joseph/slightlyrobot/android/boxing-android-app/app/build/intermediates/pre-dexed/debug/classes-f9b79861ab57d24cc13ade8793ce25ced4f753ab.jar" />
     </item>
 
 </items>
